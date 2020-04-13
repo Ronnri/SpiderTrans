@@ -1,4 +1,4 @@
-requests==2.19.1
+requests==2.20.0
 PyExecJS==1.5.1
 parsel==1.5.2
 grpcio==1.28.1
