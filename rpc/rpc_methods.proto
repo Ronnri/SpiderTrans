@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package pb; // 包名
+
+// 定义一个调用爬虫的服务
+service GetSearch {
+    // python项目的 SearchInfo方法
+    rpc SearchInfo (Params) returns (Res) {}
+
+}
+
+//请求携带的参数
+message Params {
+    string url = 1;
+}
+
+//响应的参数
+message Res {
+    string res = 1;
+}
