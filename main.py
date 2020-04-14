@@ -56,11 +56,12 @@ def visitURL(base_url):
         print("None,change filter4")
         text = data.xpath('//div[@class="rich_media_content "]/text()').extract()
 
-    print(text)
+    print("get data->",text)
     translator = Translator.translator(src='zh-CN', dest='en')
 
     page_content = ""
     if not text:
+        print("empty response")
         return page_content
 
     for item in text:
@@ -99,6 +100,8 @@ def serve():
 
 
 if __name__ == '__main__':
-    serve()
-    # res = visitURL("""https://mp.weixin.qq.com/s?src=3&timestamp=1586782639&ver=1&signature=5EOm8hi5Q55lr0myCJf6PntNacVkLskuN7H5gvKcGnpaCci3iEl-gA6Iot9Newa6Zxpsbqyiv4*5NM006S32Ha4LeHbEnGvKUKfe-48Dw*38wf*tN1pRUFi2FfcxVJzZeJwKWudfT7ve8MkQYo19fQ==""")
-    # print(res)
+    # serve()
+    response = visitURL("""https://mp.weixin.qq.com/s?src=3&timestamp=1586782639&ver=1&signature=5EOm8hi5Q55lr0myCJf6PntNacVkLskuN7H5gvKcGnpaCci3iEl-gA6Iot9Newa6Zxpsbqyiv4*5NM006S32Ha4LeHbEnGvKUKfe-48Dw*38wf*tN1pRUFi2FfcxVJzZeJwKWudfT7ve8MkQYo19fQ==""")
+    if not response:
+        response = "爬取失败"
+    print("爬取结果：", response)
