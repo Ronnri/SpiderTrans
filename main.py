@@ -7,7 +7,8 @@ import time
 # 引入代码
 import sys
 from sys import path
-
+import sys
+sys.path.append("./rpc")
 # path.append(sys.path[0] + '\\rpc')
 # path.append(sys.path[0] + '\\GoogleFreeTrans')
 
