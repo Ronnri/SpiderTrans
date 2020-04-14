@@ -82,8 +82,8 @@ class GetSearch(rpc_methods_pb2_grpc.GetSearchServicer):
         if not response:
             response = "爬取失败"
         length = 0
-        if len(response)>10:
-            length = 10
+        if len(response)>30:
+            length = 30
         else:
             length = len(response)
         print("爬取结果："+response[:length]+"……")
