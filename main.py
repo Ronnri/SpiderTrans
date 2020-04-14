@@ -8,10 +8,10 @@ import time
 import sys
 from sys import path
 
-path.append(sys.path[0] + '\\rpc')
-path.append(sys.path[0] + '\\GoogleFreeTrans')
-from GoogleFreeTrans import Translator
+# path.append(sys.path[0] + '\\rpc')
+# path.append(sys.path[0] + '\\GoogleFreeTrans')
 
+from GoogleFreeTrans import Translator
 from rpc import rpc_methods_pb2, rpc_methods_pb2_grpc
 
 import parsel
@@ -42,8 +42,9 @@ def getSentence(content):
 
     return sentence
 
+
 def visitURL(base_url):
-# base_url = "https://mp.weixin.qq.com/s?src=11&timestamp=1586779202&ver=2276&signature=Hu*YxuJwLetW6Eu24Hju2QRQyiQten3BK8ER9i92SnqBja57Pbn*MLtAb8XEMKpPs0nLxl8IU3T6TRck1EGWlPYLfGBBy8pKPXKqSeHv-Oc=&new=1"
+    # base_url = "https://mp.weixin.qq.com/s?src=11&timestamp=1586779202&ver=2276&signature=Hu*YxuJwLetW6Eu24Hju2QRQyiQten3BK8ER9i92SnqBja57Pbn*MLtAb8XEMKpPs0nLxl8IU3T6TRck1EGWlPYLfGBBy8pKPXKqSeHv-Oc=&new=1"
 
     html = urllib.request.urlopen(base_url).read()
     data = parsel.Selector(str(html))
@@ -59,7 +60,6 @@ def visitURL(base_url):
     if not text:
         print("None,change filter4")
         text = data.xpath('//div[@class="rich_media_content "]/text()').extract()
-
 
     translator = Translator.translator(src='zh-CN', dest='en')
     # print(translator.translate('中国'))
@@ -82,11 +82,11 @@ def visitURL(base_url):
 
 class GetSearch(rpc_methods_pb2_grpc.GetSearchServicer):
     def SearchInfo(self, request, context):
-        print("\n开始爬取：",request.url)
+        print("\n开始爬取：", request.url)
         response = visitURL(request.url)
         if not response:
             response = "爬取失败"
-        print("爬取结果：",response)
+        print("爬取结果：", response)
         return rpc_methods_pb2.Res(res=response)
 
 
@@ -94,7 +94,7 @@ def serve():
     grpcServer = grpc.server(futures.ThreadPoolExecutor(max_workers=4))
     rpc_methods_pb2_grpc.add_GetSearchServicer_to_server(GetSearch(), grpcServer)
     grpcServer.add_insecure_port(_HOST + ':' + _PORT)
-    print("[start listen] "+_HOST + ':' + _PORT)
+    print("[start listen] " + _HOST + ':' + _PORT)
     grpcServer.start()
     try:
         while True:

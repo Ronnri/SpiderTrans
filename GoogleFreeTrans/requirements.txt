@@ -1,2 +1,0 @@
-PyExecJS
-requests
