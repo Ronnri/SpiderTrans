@@ -1,16 +1,10 @@
 # -*- coding: utf-8 -*-
 from concurrent import futures
-
 import grpc
 import time
-
-# 引入代码
-import sys
-from sys import path
 import sys
 sys.path.append("./rpc")
-# path.append(sys.path[0] + '\\rpc')
-# path.append(sys.path[0] + '\\GoogleFreeTrans')
+
 
 from GoogleFreeTrans import Translator
 from rpc import rpc_methods_pb2, rpc_methods_pb2_grpc
@@ -62,8 +56,8 @@ def visitURL(base_url):
         print("None,change filter4")
         text = data.xpath('//div[@class="rich_media_content "]/text()').extract()
 
+    print(text)
     translator = Translator.translator(src='zh-CN', dest='en')
-    # print(translator.translate('中国'))
 
     page_content = ""
     if not text:
