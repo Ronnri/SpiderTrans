@@ -1,7 +1,7 @@
 requests==2.20.0
 PyExecJS==1.5.1
 parsel==1.5.2
-grpcio==1.28.1
+grpcio==1.53.0
 pytest==3.8.0
 grpc==0.3-19
 protobuf==3.11.3
